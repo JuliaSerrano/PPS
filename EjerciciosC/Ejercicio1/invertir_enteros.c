@@ -1,57 +1,55 @@
 #include <stdio.h>
-
 #include <stdlib.h>
+#include <string.h>
 
+//counter of number elements we add to array
+int i = 0;
 
-const char* readFile(){
+//reads 'numeros.txt' file and adds text to an array
+void readFile(char *arr[]){
 
+	//variables
+    char aux[30];
+    FILE *in = fopen("numeros.txt","r");
 
-	/*pointer of type FILE, open for reading*/
-	FILE *in = fopen("numeros.txt","r");
-	static int arr[10];
-	char c;
-	int counter = 0;
-	int i;
-	static char str[60];
-	/*file doesn't exist*/
-	if (in == NULL){
-		perror("Error while opening the file.\n");
-		exit(0);
-	}
+	//problem opening 'numeros.txt'
+	if(in == NULL) {
+      perror("Error opening file");
+      
+   }
+    
+    do{
 
-	if(fgets(str,60,in)!=NULL){
-		puts(str);
-	}
+		//reads a line
+        if (fgets(aux,100,in)!= NULL){
+            if(strndup(aux,100)== NULL){
+                break;
+            }
+            arr[i] = strndup(aux,100);
+        
+        i++;
+        }
+    }while(!feof(in));
 	
 	fclose(in);
-	return str;
-	/* gets the next character until the end of file/error (EOF)  */
-/*	while((c=fgetc(in))!=EOF){
-		arr[counter]=c;
-		counter++;
-	fclose(in);
-	for(i=0;i<counter;i++)
-		printf("%d ", arr[i]);		
+	
+	
 
-*/
 }
 
 
 
 
-
-
-
-
 int main() {
-  /*	int *p;
-	int i;
-	p = readFile();
-	for (i = 0;i<10;i++){
-	printf( "%d\n",*p);
-*/
-	printf("%s",readFile());
-
+	
+	char *arr[100] = {0};
+	readFile(arr);
+	//print array
+	for(int j = 0;j<i;j++){
+        
+         printf("%s\n", arr[j]);
+         
+     }
 	return 0;
 	
 }

@@ -5,8 +5,10 @@
 int main() {
 
 
-    static char *arr[20];
-    char aux[20];
+    static char *arr[30];
+    char aux[30];
+
+    //stores number of elements we add to arr
     int i = 0;
 
     //open file
@@ -14,13 +16,13 @@ int main() {
     
     do{
         //read the file
-        if (fgets(aux,20,in)!= NULL){
+        if (fgets(aux,30,in)!= NULL){
             //no more to read
-            if(strndup(aux,20)== NULL){
+            if(strndup(aux,30)== NULL){
                 break;
             }
             //add to array
-            arr[i] = strndup(aux,20);
+            arr[i] = strndup(aux,30);
         
             i++;
         }
