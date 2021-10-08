@@ -22,9 +22,11 @@ void readFile(char *arr[]){
 
 		//reads a line
         if (fgets(aux,100,in)!= NULL){
-            if(strndup(aux,100)== NULL){
+            //no more to read
+			if(strndup(aux,100)== NULL){
                 break;
             }
+			//add to array
             arr[i] = strndup(aux,100);
         
         i++;
@@ -42,12 +44,26 @@ void readFile(char *arr[]){
 
 int main() {
 	
+    
 	char *arr[100] = {0};
 	readFile(arr);
-	//print array
+    int num_elem = i;
+    long int res[num_elem];
+    
+    
+
+
+    //differentiate between int and string
+    for(int x=0;x<num_elem;x++){
+        res[x] = strtol(arr[x],NULL,10);
+    }
+    //printIntegers(res,num_elem);
+	
+    //print array
 	for(int j = 0;j<i;j++){
         
-         printf("%s\n", arr[j]);
+        printf("En array de ints, el Numero es:  %ld\n", res[j]);
+        printf("Palabra/Numero: %d es %s\n", j,arr[j]);
          
      }
 	return 0;
